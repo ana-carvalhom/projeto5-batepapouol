@@ -32,13 +32,36 @@ function renderizarMensagens(){
     ulMensagens.innerHTML = "";
 
     for (let i = 0; i < mensagens.length; i++){
+
+        if(mensagens[i].type === "message"){
         ulMensagens.innerHTML += `
-        <li>
-        ${mensagens[i].time} ${mensagens[i].text}
+        <li class="publica">
+        <span class="time">${mensagens[i].time}</span> <span class="name">${mensagens[i].from}</span> para <span class="name">${mensagens[i].to}</span> ${mensagens[i].text}
         </li>
 
         
         `;
+        }    
         
-    }
+        if(mensagens[i].type === "private_message"){
+                ulMensagens.innerHTML += `
+                <li class="reservada">
+                <span class="time">${mensagens[i].time}</span> <span class="name">${mensagens[i].from}</span> reservadamente <span class="name">${mensagens[i].to}</span> ${mensagens[i].text}
+                </li>
+        
+                
+                `;
+            }
+
+        if(mensagens[i].type === "status"){
+                ulMensagens.innerHTML += `
+                <li class="entrou-saiu">
+                <span class="time">${mensagens[i].time}</span> <span class="name">${mensagens[i].from}</span> ${mensagens[i].text}
+                </li>
+        
+                
+                `;
+            }
+        }
+        
 }
