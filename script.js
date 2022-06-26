@@ -89,7 +89,7 @@ function renderizarMensagens(){
 
     for (let i = 0; i < mensagens.length; i++){
 
-        if(mensagens[i].type === "message"){
+        if(mensagens[i].type === "message" && mensagens[i].to === "Todos"){
         ulMensagens.innerHTML += `
         <li class="publica">
         <span class="time">${mensagens[i].time}</span> <span class="name">${mensagens[i].from}</span> para <span class="name">${mensagens[i].to}</span> ${mensagens[i].text}
@@ -99,7 +99,7 @@ function renderizarMensagens(){
         `;
         }    
         
-        if(mensagens[i].type === "private_message"){
+        if(mensagens[i].type === "private_message" && mensagens[i].to === userCadastrado.name){
                 ulMensagens.innerHTML += `
                 <li class="reservada">
                 <span class="time">${mensagens[i].time}</span> <span class="name">${mensagens[i].from}</span> reservadamente <span class="name">${mensagens[i].to}</span> ${mensagens[i].text}
