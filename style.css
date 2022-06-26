@@ -43,13 +43,14 @@ header :nth-child(2){
 .chat {
    height: 441px;
    margin-top: 26px;
+   overflow-y: auto;
+   overflow-x: scroll;
    
 }
 
 li {
 
     width: 40px;
-    background-color: purple;
     width: 100%;
     display: block;
     align-items: center;
