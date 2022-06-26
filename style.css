@@ -44,7 +44,7 @@ header :nth-child(2){
    height: 441px;
    margin-top: 26px;
    overflow-y: auto;
-   overflow-x: scroll;
+   overflow-x: scr;
    
 }
 
@@ -92,8 +92,8 @@ li {
 }
 
 .digitar-mensagem img{
-    right: 20px;
-    bottom: 30px;
+    right: 500px;
+    bottom: 20px;
     z-index: 1;
     position: absolute;
 }
