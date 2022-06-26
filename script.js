@@ -3,6 +3,7 @@ let novoUser;
 let userCadastrado;
 
 usuario();
+manterConexao();
 buscarMensagens();
 
 //Criar um novo usuário e verificar se ele já existe
@@ -31,7 +32,7 @@ function usuario(){
 function alertarErro(erro){
     console.log(erro);
     alert("Esse nome de usuário já existe. Por favor, escolha outro!");
-    usuario()
+    usuario();
 }
 
 function alertarUser (resposta){
@@ -39,9 +40,17 @@ console.log("ALERTA POST")
 buscarMensagens();
 }
 
-//Verificar se o usuário está online
+//Verificar se o usuário está online - manter conexão
+function manterConexao(){
+    let userConectado = {
+        name: userCadastrado.name,
+    }
 
-
+    axios.post("https://mock-api.driven.com.br/api/v6/uol/status", userConectado)
+    console.log("user conectado")
+    setInterval(manterConexao,3000);
+    
+}
 
 // Buscar mensagens do servidor e renderizar
 
@@ -53,6 +62,7 @@ function buscarMensagens(){
         "https://mock-api.driven.com.br/api/v6/uol/messages"
         );
     promessa.then(popularMensagens);
+   setInterval(buscarMensagens,4500);
 
 }
 
@@ -114,28 +124,25 @@ function renderizarMensagens(){
 
 //Enviar mensagens
 
-function enviarMensagem(){
-    const nomeUsuario = novoUser;
-    const textoMensagem = document.querySelector('textarea').value;
-    const publico = 'Todos';
-    const tipo = 'message';
 
-    const novaMensagem = {
-        from: nomeUsuario,
-        to: publico,
-        text: textoMensagem,
-        type: tipo,
+
+function novaMensagem(el){
+    const novasMensagens = document.querySelector('textarea').value;
+    const nome = userCadastrado.name;
+    let enviarMensagem={
+       from: nome,
+        to: "Todos",
+        text: novasMensagens,
+        type: "message"
     }
+ 
+    promise=axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",enviarMensagem);
+    promise.then(buscarMensagens);
+    promise.catch(alertar);
+ }
 
-    console.log("Objeto criado com sucesso")
-    console.log(novaMensagem);
-        
-    const promiseMensagem = axios.post("https://mock-api-driven.com.br/api/v6/uol/messages", novaMensagem);
-    promiseMensagem.then(alertarMensagem)
-}
 
-function alertarMensagem (resposta){
-    console.log("Mensagem enviada com sucesso");
-    console.log(resposta);
-    
-}
+ function alertar(erro){
+  console.log(erro);
+  alert("Deu erro ai")
+ }
