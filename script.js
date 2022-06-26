@@ -73,6 +73,7 @@ function renderizarMensagens(){
                 `;
             }
         }
+<<<<<<< HEAD
     }
 
 
@@ -117,4 +118,7 @@ function enviarMensagem(){
         console.log("deu ruim"));
 
     document.querySelector(".digitar-mensagem").value = "";
+=======
+        
+>>>>>>> 16b00f2893f32ceca584fddaea06ecb7fbc4d680
 }
