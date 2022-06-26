@@ -39,6 +39,9 @@ console.log("ALERTA POST")
 buscarMensagens();
 }
 
+//Verificar se o usuário está online
+
+
 
 // Buscar mensagens do servidor e renderizar
 
@@ -111,3 +114,28 @@ function renderizarMensagens(){
 
 //Enviar mensagens
 
+function enviarMensagem(){
+    const nomeUsuario = novoUser;
+    const textoMensagem = document.querySelector('textarea').value;
+    const publico = 'Todos';
+    const tipo = 'message';
+
+    const novaMensagem = {
+        from: nomeUsuario,
+        to: publico,
+        text: textoMensagem,
+        type: tipo,
+    }
+
+    console.log("Objeto criado com sucesso")
+    console.log(novaMensagem);
+        
+    const promiseMensagem = axios.post("https://mock-api-driven.com.br/api/v6/uol/messages", novaMensagem);
+    promiseMensagem.then(alertarMensagem)
+}
+
+function alertarMensagem (resposta){
+    console.log("Mensagem enviada com sucesso");
+    console.log(resposta);
+    
+}
